@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectArchive_TestTask.View.EmployeeEditPage"
+             xmlns:ViewModel="clr-namespace:ProjectArchive_TestTask.ViewModel"
+             Title="Edit"
+             NavigationPage.HasBackButton="False">
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="End edit" Command="{Binding EditCommand}"
+                            HorizontalOptions="CenterAndExpand" />
+                    <Button Text="Add Project" Command="{Binding AddCommand}"
+                            HorizontalOptions="CenterAndExpand" />
+                    <Button Text="Delete project" Command="{Binding DeleteCommand}"
+                            HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+                
+                   
+                
+                <StackLayout>
+                    <StackLayout.BindingContext >
+                        <ViewModel:EmployeeEditViewModel x:Name="EmployeeEdit"/>
+                    </StackLayout.BindingContext>
+                    <StackLayout Orientation="Horizontal">
+                        <Button Text="Add project to head" Command="{Binding AddProjectToHeadCommand}"
+                                HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                    <StackLayout BindingContext="{Binding Employee}">
+                        <Entry Text="{Binding FirstName}" Placeholder="First name" FontSize="Medium"/>
+                        <Entry Text="{Binding SecondName}" Placeholder="Second name" FontSize="Medium"/>
+                        <Entry Text="{Binding Patronymic}" Placeholder="Patronymic" FontSize="Medium"/>
+                        <Entry Text="{Binding Email}" Placeholder="Email" FontSize="Medium"/>
+                    </StackLayout>
+                    <Picker Title="Select a project" ItemsSource="{Binding Projects}"
+                        ItemDisplayBinding="{Binding ProjectName}" 
+                        SelectedItem="{Binding SelectedProject,Mode=TwoWay}" />
+                    <Picker Title="The employee if the head of project:"
+                        ItemsSource="{Binding Projects,Mode=TwoWay}" 
+                        ItemDisplayBinding="{Binding ProjectName}" 
+                        SelectedItem="{Binding HeadOfProject,Mode=TwoWay}"/>
+
+                    <Label Text="{Binding AllInfo}" FontSize="Medium"/>
+                    <Label Text="{Binding Error}" FontSize="Medium"/>
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
+ 

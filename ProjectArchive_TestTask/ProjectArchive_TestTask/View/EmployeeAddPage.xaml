@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectArchive_TestTask.View.EmployeeAddPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Text="{Binding FirstName}" Placeholder="First Name" FontSize="Medium"/>
+            <Entry Text="{Binding SecondName}" Placeholder="Second Name" FontSize="Medium"/>
+            <Entry Text="{Binding Patronymic}" Placeholder="Patronymic" FontSize="Medium"/>
+            <Entry Text="{Binding Email}" Placeholder="Email@mail.ru" FontSize="Medium"/>
+            <Picker Title="Select a project"
+                    ItemsSource="{Binding Projects}"
+                    ItemDisplayBinding="{Binding ProjectName}"
+                    SelectedItem="{Binding SelectedProject,Mode=TwoWay}" />
+            <Picker Title="The employee if the head of project:"
+                    ItemsSource="{Binding Projects,Mode=TwoWay}"
+                    ItemDisplayBinding="{Binding ProjectName}"
+                    SelectedItem="{Binding HeadOfProject,Mode=TwoWay}"/>
+            <Button Text="Add" Command="{Binding AddEmployeeCommand}"
+                    HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding Error}" FontSize="Medium"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

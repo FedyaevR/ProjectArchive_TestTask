@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectArchive_TestTask.View.ProjectAddPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Text="{Binding ProjectName}"
+                   Placeholder="Project Name"
+                   FontSize="Medium"/>
+            <Entry Text="{Binding CustomerCompanyName}"
+                   Placeholder="Customer Company Name"
+                   FontSize="Medium"/>
+            <Entry Text="{Binding PerformerCompanyName}"
+                   Placeholder="Performer Company Name"
+                   FontSize="Medium"/>
+            <Picker Title="Select a priority of project"
+                    ItemsSource="{Binding Priority}" 
+                    SelectedItem="{Binding SelectedPriority, Mode=TwoWay}" />
+            <Label Text="Date start of project"
+                   FontSize="Medium"/>
+            <DatePicker Date="{Binding StartDate}"
+                        MinimumDate="01.01.1976"/>
+            <Label Text="Date done of project"
+                   FontSize="Medium"/>
+            <DatePicker Date="{Binding DoneDate}"
+                        MinimumDate="01.01.1976"/>
+            <Picker Title="Select an employee"
+                    ItemsSource="{Binding Employees}"
+                    ItemDisplayBinding="{Binding SecondName}"
+                    SelectedItem="{Binding SelectedEmployee,Mode=TwoWay}" />
+            <Button Text="Add"
+                    Command="{Binding AddProjectCommand}"
+                    HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding Error}" FontSize="Medium"/>
+           
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

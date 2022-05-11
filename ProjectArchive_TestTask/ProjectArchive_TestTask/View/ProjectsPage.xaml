@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModels="clr-namespace:ProjectArchive_TestTask.ViewModel"
+             x:Class="ProjectArchive_TestTask.View.ProjectsPage">
+
+    <ContentPage.ToolbarItems >
+        <ToolbarItem Text="Add Project" 
+                     Command="{Binding AddCommand}" />
+        <ToolbarItem Text="Edit" 
+                     Command="{Binding EditCommand}" />
+        <ToolbarItem Text="Delete"
+                     Command="{Binding DeleteCommand}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content >
+       
+        <StackLayout>
+            <StackLayout.BindingContext>
+                <ViewModels:ProjectListViewModel x:Name="ProjectsList"/>
+            </StackLayout.BindingContext>
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <Picker Title="Priority from"
+                        ItemsSource="{Binding Priority}"
+                        HorizontalOptions="StartAndExpand"   
+                        SelectedItem="{Binding SelectedPriorityFrom, Mode=TwoWay}"
+                        FontSize="Small"/>
+                    <Label Text="Date of start from:"
+                           VerticalOptions="CenterAndExpand"/>
+                    <DatePicker Date="{Binding FirstDate,Mode=TwoWay}" 
+                                VerticalOptions="CenterAndExpand"
+                                 MinimumDate="01.01.1976"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Picker Title="Priority to" 
+                        ItemsSource="{Binding Priority}"
+                        HorizontalOptions="StartAndExpand"
+                        SelectedItem="{Binding SelectedPriorityTo, Mode=TwoWay}"
+                        FontSize="Small"/>
+                    <Label Text="Date to:"
+                           VerticalOptions="CenterAndExpand"/>
+                    <DatePicker Date="{Binding SecondDate,Mode=TwoWay}" 
+                                VerticalOptions="CenterAndExpand"
+                                MinimumDate="01.01.1976"/>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Filter" Command="{Binding FilterCommand}"/>
+                <Button Text="Sort" Command="{Binding SortCommand}"/>
+                <Picker ItemsSource="{Binding SortMethodList}" SelectedItem="{Binding SelectedSortMethod}" WidthRequest="250" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+           
+            <ListView ItemsSource="{Binding Projects}" Header="Projects" SelectedItem="{Binding SelectedProject,Mode=TwoWay}">
+                <ListView.ItemTemplate >
+                    <DataTemplate >
+                        <ViewCell>
+                            <ViewCell.View >
+                                <StackLayout   Orientation="Vertical" VerticalOptions="CenterAndExpand" >
+                                    <Label Text="{Binding ProjectName}"  FontSize="Medium"/>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ScrollView>
+                <StackLayout HeightRequest="500">
+                    <Label Text="Project info:"/>
+            <Label Text="{Binding ProjectInfo}" FontSize="Medium"/>
+            </StackLayout>
+            </ScrollView>
+        </StackLayout>
+       
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjectArchive_TestTask.View.ProjectEditPage"
+             xmlns:ViewModel="clr-namespace:ProjectArchive_TestTask.ViewModel"
+             Title="Edit Project"
+             NavigationPage.HasBackButton="False">
+    
+    <ContentPage.Content >
+        <ScrollView>
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="End Edit" Command="{Binding EditCommand}"
+                        HorizontalOptions="CenterAndExpand" />
+                    <Button Text="Add employee" Command="{Binding AddCommand}"
+                        HorizontalOptions="CenterAndExpand" />
+                    <Button Text="Delete employee" Command="{Binding DeleteCommand}"
+                        HorizontalOptions="CenterAndExpand" />
+                </StackLayout>
+                <StackLayout>
+                    <StackLayout.BindingContext>
+                        <ViewModel:ProjectEditViewModel x:Name="ProjectEdit"/>
+                    </StackLayout.BindingContext>
+            <StackLayout BindingContext="{Binding Project}">
+                <Entry Text="{Binding ProjectName}" Placeholder="Project name" FontSize="Medium"/>
+                <Entry Text="{Binding CustomerCompanyName}" Placeholder="Customer company name" FontSize="Medium"/>
+                <Entry Text="{Binding PerformerCompanyName}" Placeholder="Performer company name" FontSize="Medium"/>
+            </StackLayout>
+                <Picker Title="Select a priority of project"
+                        ItemsSource="{Binding Priority}"
+                        SelectedItem="{Binding SelectedPriority, Mode=TwoWay}" />
+                <Label Text="Date start of project" FontSize="Medium"/>
+                <DatePicker Date="{Binding StartDate}" MinimumDate="01.01.1976"/>
+                <Label Text="Date done of project" FontSize="Medium"/>
+                    <DatePicker Date="{Binding DoneDate}" MinimumDate="01.01.1976" />
+                <Picker Title="Select an employee"
+                    ItemsSource="{Binding Employees}" 
+                    ItemDisplayBinding="{Binding SecondName}" 
+                    SelectedItem="{Binding SelectedEmployee,Mode=TwoWay}" />
+
+                    <Label Text="{Binding ProjectInfo}" FontSize="Small"/>
+
+
+                    <Label Text="{Binding Error}" FontSize="Medium"/>
+                </StackLayout>
+                
+              
+           
+           
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
